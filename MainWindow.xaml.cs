@@ -1,4 +1,9 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using PR8_0202.Classes;
 
 namespace PR8_0202
 {
@@ -16,6 +23,12 @@ namespace PR8_0202
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void SearchCity(object sender, MouseButtonEventArgs e)
+        {
+            Weather.Visibility = Visibility.Hidden;
+            Search.Visibility = Visibility.Hidden;
+            CityTextbox.Visibility = Visibility.Visible;
+        }
         public MainWindow()
         {
             InitializeComponent();
