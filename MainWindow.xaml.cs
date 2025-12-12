@@ -23,6 +23,8 @@ namespace PR8_0202
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string ApiKey = "83cb011eeb954d7b7dbbe847f49e51cb";
+        private const string ApiUrl = "https://api.openweathermap.org/data/2.5/forecast?q={0}&appid={1}&units=metric&lang=ru";
         private void SearchCity(object sender, MouseButtonEventArgs e)
         {
             Weather.Visibility = Visibility.Hidden;
