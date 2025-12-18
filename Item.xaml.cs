@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using PR8_0202.Models;
+
+namespace PR8_0202
+{
+    /// <summary>
+    /// Логика взаимодействия для Item.xaml
+    /// </summary>
+    public partial class Item : UserControl
+    {
+        public Item(Hour hour)
+        {
+            InitializeComponent();
+
+            lHour.Content = hour.hour;
+            lCondition.Content = hour.ToCondition();
+            lHumidity.Content = hour.humidity + "%";
+            lPrecType.Content = hour.ToPrecType();
+            lTemp.Content = hour.temp;
+        }
+    }
+}

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using PR8_0202.Classes;
+using PR8_0202.Models;
 
 namespace PR8_0202
 {
@@ -23,17 +24,43 @@ namespace PR8_0202
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string ApiKey = "83cb011eeb954d7b7dbbe847f49e51cb";
-        private const string ApiUrl = "https://api.openweathermap.org/data/2.5/forecast?q={0}&appid={1}&units=metric&lang=ru";
-        private void SearchCity(object sender, MouseButtonEventArgs e)
-        {
-            Weather.Visibility = Visibility.Hidden;
-            Search.Visibility = Visibility.Hidden;
-            CityTextbox.Visibility = Visibility.Visible;
-        }
+        DataResponse response;
         public MainWindow()
         {
             InitializeComponent();
+            Iint();
+        }
+
+        public async void Iint()
+        {
+            response = await GetWeather.Get(58.01168f, 56.286672f);
+
+            foreach (Forecast forecast in response.forecasts)
+            {
+                Days.Items.Add(forecast.date.ToString("dd.MM.yyyy"));
+            }
+            Create(0);
+        }
+        public void Create(int idForecast)
+        {
+            parent.Children.Clear();
+            foreach (Hour hour in response.forecasts[idForecast].hours)
+            {
+                parent.Children.Add(new Item(hour));
+            }
+        }
+
+
+        private void SelectDay(object sender, SelectionChangedEventArgs e)
+        {
+            Create(Days.SelectedIndex);
+        }
+
+
+        private void UpdateWeather(object sender, RoutedEventArgs e)
+        {
+            Iint();
+
         }
     }
 }
